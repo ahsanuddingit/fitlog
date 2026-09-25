@@ -1,6 +1,8 @@
 import Image from "next/image";
 import { notFound } from "next/navigation";
-import { Plus, Bookmark } from "lucide-react";
+import { Plus, Bookmark, Save } from "lucide-react";
+import AddButton from "@/components/Plandetails/AddButton";
+import SaveButton from "@/components/Plandetails/SaveButton";
 
 interface WorkoutData {
   id: string;
@@ -35,10 +37,6 @@ export default async function WorkoutPage({
 
   const data: WorkoutData = await res.json();
 
-  const handleAddToPlan = () => {
-    // Logic to add the workout to today's plan
-    console.log(`Workout ${data.name} added to today's plan.`);
-  }
 
   const details = [
     { label: "EQUIPMENT", value: data.equipment },
@@ -124,14 +122,8 @@ export default async function WorkoutPage({
 
           {/* Action Buttons */}
           <div className="mt-6 flex gap-3">
-            <button className="flex flex-1 cursor-pointer items-center justify-center gap-2 rounded-xl bg-[#ccff00] px-4 py-3 text-xs font-bold text-black transition hover:bg-[#b3e600] active:scale-95">
-              <Plus size={16} strokeWidth={2.5} />
-              <span>Add to today's plan</span>
-            </button>
-            <button className="flex cursor-pointer items-center justify-center gap-2 rounded-xl border border-gray-800 bg-[#161a23] px-4 py-3 text-xs font-semibold text-gray-300 transition hover:bg-gray-800 active:scale-95">
-              <Bookmark size={16} />
-              <span>Save for later</span>
-            </button>
+            <AddButton data={data} />
+            <SaveButton data={data} />
           </div>
         </div>
       </div>
