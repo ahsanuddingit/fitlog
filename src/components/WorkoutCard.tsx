@@ -22,6 +22,8 @@ const WorkoutCard = ({ data }: { data: Workout }) => {
         <div className="card-body">
           <h2 className="card-title">{name}</h2>
           <p className="text-sm text-gray-400">{equipment}</p>
+            <div className="divider"></div>
+
           <div className="flex gap-2 mt-2">
             <div className="badge badge-outline">{duration} min</div>
             <div className="badge badge-outline">{rating} ⭐</div>

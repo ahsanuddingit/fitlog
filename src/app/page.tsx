@@ -4,7 +4,6 @@ import WorkoutCard from "@/components/WorkoutCard";
 export default async function Home() {
   const res = await fetch("https://api.abcz.workers.dev/api/fitlog");
   const datas = await res.json();
-  
 
   return (
     <>

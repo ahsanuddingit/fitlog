@@ -86,7 +86,7 @@ const MyPlan = () => {
                   : 'text-gray-400 hover:text-white'
               }`}
             >
-              Today's Plan
+              Today&apos;s Plan
             </button>
             <button
               onClick={() => setActiveTab('saved')}
@@ -142,7 +142,7 @@ const MyPlan = () => {
               >
                 {/* Left Card Info */}
                 <div className="flex items-center gap-4">
-                  <div className="relative w-28 h-20 flex-shrink-0 overflow-hidden rounded-xl bg-gray-900">
+                  <div className="relative w-28 h-20 shrink-0 overflow-hidden rounded-xl bg-gray-900">
                     <Image
                       src={item.image || 'https://img.magnific.com/free-photo/3d-cartoon-fitness-man_23-2151691400.jpg?w=740'}
                       alt={item.name || 'Workout item'}
@@ -181,7 +181,11 @@ const MyPlan = () => {
                   
                   {activeTab === 'today' && (
                     <button
-                      onClick={() => planContext?.removeFromPlan?.(item.id)}
+                      onClick={() => {
+                        if (item.id !== undefined && item.id !== null) {
+                          planContext?.removeFromPlan?.(item.id);
+                        }
+                      }}
                       className="flex items-center gap-1.5 px-4 py-2 bg-lime-400 hover:bg-lime-300 text-black font-bold text-xs rounded-xl transition-all shadow-md shadow-lime-400/10"
                     >
                       <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -192,7 +196,11 @@ const MyPlan = () => {
                   )}
 
                   <button
-                    onClick={() => planContext?.removeItem?.(item.id, activeTab)}
+                    onClick={() => {
+                      if (item.id !== undefined && item.id !== null) {
+                        planContext?.removeItem?.(item.id, activeTab);
+                      }
+                    }}
                     className="p-2 text-gray-500 hover:text-gray-300 transition-colors rounded-lg"
                     aria-label="Remove item"
                   >

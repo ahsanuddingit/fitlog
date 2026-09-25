@@ -35,7 +35,7 @@ export default async function WorkoutPage({
     <div className="flex min-h-screen items-center justify-center bg-[#090b0e] p-4 font-sans">
       <div className="flex w-full max-w-4xl flex-col gap-6 rounded-3xl bg-[#0e1117] p-6 text-gray-200 shadow-2xl md:flex-row">
         {/* Left Column: Image */}
-        <div className="relative min-h-[300px] w-full overflow-hidden rounded-2xl md:w-1/2">
+        <div className="relative min-h-75 w-full overflow-hidden rounded-2xl md:w-1/2">
           <Image
             src={data.image}
             alt={data.name}
