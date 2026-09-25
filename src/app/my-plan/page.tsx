@@ -125,7 +125,7 @@ const MyPlan = () => {
             </p>
             <div className="pt-2">
               <Link
-                href="/"
+                href="/workouts"
                 className="inline-block bg-lime-400 hover:bg-lime-300 text-black font-bold px-6 py-3 rounded-full transition-all duration-200 shadow-lg shadow-lime-400/10"
               >
                 Go to workouts

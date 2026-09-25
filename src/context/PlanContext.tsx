@@ -1,25 +1,13 @@
 'use client';
 
 import React, { createContext, useState } from 'react';
-
-export type PlanItem = {
-  id?: string | number;
-  _id?: string | number;
-  name?: string;
-  duration?: number | string;
-  caloriesBurned?: number | string;
-  image?: string;
-  equipment?: string;
-  description?: string;
-  rating?: number | string;
-  [key: string]: unknown;
-};
+import { Workout } from '@/types/workout';
 
 interface PlanContextType {
-  plan: PlanItem[];
-  setPlan: React.Dispatch<React.SetStateAction<PlanItem[]>>;
-  add: PlanItem[];
-  setAdd: React.Dispatch<React.SetStateAction<PlanItem[]>>;
+  plan: Workout[];
+  add: Workout[];
+  addToToday: (item: Workout) => void;
+  saveForLater: (item: Workout) => void;
   removeFromPlan: (id: string | number) => void;
   removeItem: (id: string | number, tab: string) => void;
 }
@@ -27,18 +15,33 @@ interface PlanContextType {
 export const PlanContext = createContext<PlanContextType | null>(null);
 
 const PlanProvider = ({ children }: { children: React.ReactNode }) => {
-  const [plan, setPlan] = useState<PlanItem[]>([]);
-  const [add, setAdd] = useState<PlanItem[]>([]);
+  const [plan, setPlan] = useState<Workout[]>([]);
+  const [add, setAdd] = useState<Workout[]>([]);
 
-  // Helper to safely match item IDs across various key names (id vs _id)
-  const getItemId = (item: PlanItem) => item.id ?? item._id;
+  const getItemId = (item: Workout) => item.id ?? item._id;
 
-  // "Mark as Done" handler: removes item from "Today's Plan" (add array)
+  // Add to Today's Plan (prevents duplicates)
+  const addToToday = (item: Workout) => {
+    setAdd((prev) => {
+      const exists = prev.some((i) => getItemId(i) === getItemId(item));
+      return exists ? prev : [...prev, item];
+    });
+  };
+
+  // Save for Later (prevents duplicates)
+  const saveForLater = (item: Workout) => {
+    setPlan((prev) => {
+      const exists = prev.some((i) => getItemId(i) === getItemId(item));
+      return exists ? prev : [...prev, item];
+    });
+  };
+
+  // "Mark as Done" handler
   const removeFromPlan = (id: string | number) => {
     setAdd((prev) => prev.filter((item) => getItemId(item) !== id));
   };
 
-  // "Remove" handler: deletes from whichever tab is currently active
+  // "Remove" handler
   const removeItem = (id: string | number, tab: string) => {
     if (tab === 'today') {
       setAdd((prev) => prev.filter((item) => getItemId(item) !== id));
@@ -47,16 +50,20 @@ const PlanProvider = ({ children }: { children: React.ReactNode }) => {
     }
   };
 
-  const sharedata: PlanContextType = {
-    plan,
-    setPlan,
-    add,
-    setAdd,
-    removeFromPlan,
-    removeItem,
-  };
-
-  return <PlanContext.Provider value={sharedata}>{children}</PlanContext.Provider>;
+  return (
+    <PlanContext.Provider
+      value={{
+        plan,
+        add,
+        addToToday,
+        saveForLater,
+        removeFromPlan,
+        removeItem,
+      }}
+    >
+      {children}
+    </PlanContext.Provider>
+  );
 };
 
 export default PlanProvider;

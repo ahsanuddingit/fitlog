@@ -1,24 +1,8 @@
 import Image from "next/image";
 import { notFound } from "next/navigation";
-import { Plus, Bookmark, Save } from "lucide-react";
 import AddButton from "@/components/Plandetails/AddButton";
 import SaveButton from "@/components/Plandetails/SaveButton";
-
-interface WorkoutData {
-  id: string;
-  name: string;
-  description: string;
-  image: string;
-  equipment: string;
-  difficulty: string;
-  sets: number;
-  reps: number;
-  duration: number;
-  caloriesBurned: number;
-  rating: number;
-  muscleGroups?: string[];
-  instructions?: string[];
-}
+import { Workout } from "@/types/workout";
 
 export default async function WorkoutPage({
   params,
@@ -35,8 +19,7 @@ export default async function WorkoutPage({
     notFound();
   }
 
-  const data: WorkoutData = await res.json();
-
+  const data: Workout = await res.json();
 
   const details = [
     { label: "EQUIPMENT", value: data.equipment },
@@ -66,7 +49,6 @@ export default async function WorkoutPage({
         {/* Right Column: Content */}
         <div className="flex w-full flex-col justify-between md:w-1/2">
           <div>
-            {/* Title & Description */}
             <h1 className="text-2xl font-black tracking-wider text-white uppercase">
               {data.name}
             </h1>
@@ -74,7 +56,6 @@ export default async function WorkoutPage({
               {data.description}
             </p>
 
-            {/* Muscle Groups / Tags */}
             <div className="mt-3 flex flex-wrap gap-2">
               {data.muscleGroups?.map((group, idx) => (
                 <span
@@ -86,7 +67,6 @@ export default async function WorkoutPage({
               ))}
             </div>
 
-            {/* Details Table */}
             <div className="mt-4 flex flex-col gap-2 rounded-xl bg-[#161a23] p-4 text-xs text-gray-400">
               {details.map((detail, idx) => (
                 <div key={idx} className="flex items-center justify-between">
@@ -94,13 +74,12 @@ export default async function WorkoutPage({
                     {detail.label}
                   </span>
                   <span className="font-medium text-gray-300">
-                    {detail.value}
+                    {detail.value ?? "N/A"}
                   </span>
                 </div>
               ))}
             </div>
 
-            {/* Instructions */}
             {data.instructions && data.instructions.length > 0 && (
               <div className="mt-5">
                 <h2 className="text-xs font-bold tracking-wider text-white uppercase">
@@ -120,7 +99,6 @@ export default async function WorkoutPage({
             )}
           </div>
 
-          {/* Action Buttons */}
           <div className="mt-6 flex gap-3">
             <AddButton data={data} />
             <SaveButton data={data} />
