@@ -35,6 +35,11 @@ export default async function WorkoutPage({
 
   const data: WorkoutData = await res.json();
 
+  const handleAddToPlan = () => {
+    // Logic to add the workout to today's plan
+    console.log(`Workout ${data.name} added to today's plan.`);
+  }
+
   const details = [
     { label: "EQUIPMENT", value: data.equipment },
     { label: "DIFFICULTY", value: data.difficulty },
