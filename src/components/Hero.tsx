@@ -1,6 +1,7 @@
 import React from 'react'
 import Image from 'next/image'
-import Banner from '../../public/banner.png'
+import Banner from '../app/assets/banner.png'
+import { Link } from 'lucide-react';
 
 const Hero = () => {
     return (
@@ -25,6 +26,7 @@ const Hero = () => {
                         <button className="bg-[#C2F800] text-black hover:bg-[#a8d500] font-bold py-2 px-4 rounded">
                             BROWSE WORKOUTS
                         </button>
+
                     </div>
                 </div>
             </div>

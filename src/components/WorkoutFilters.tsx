@@ -33,56 +33,7 @@ export default function WorkoutFilters({ workouts, muscleGroups }: WorkoutFilter
   return (
     <div className="space-y-6">
       {/* Controls Bar */}
-      <div className="flex flex-col md:flex-row gap-4 justify-between items-stretch md:items-center bg-[#141820] p-4 rounded-2xl border border-gray-800">
-        
-        {/* Search Bar */}
-        <div className="relative flex-1">
-          <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" />
-          <input
-            type="text"
-            placeholder="Search exercise, equipment..."
-            value={searchQuery}
-            onChange={(e) => setSearchQuery(e.target.value)}
-            className="w-full bg-[#0d0f12] text-white text-sm pl-10 pr-10 py-2.5 rounded-xl border border-gray-800 outline-none focus:border-[#ccff00] transition"
-          />
-          {searchQuery && (
-            <button
-              onClick={() => setSearchQuery('')}
-              className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-500 hover:text-white"
-            >
-              <X className="w-4 h-4" />
-            </button>
-          )}
-        </div>
-
-        {/* Filter Pills / Categories */}
-        <div className="flex items-center gap-2 overflow-x-auto pb-2 md:pb-0 scrollbar-none">
-          <Filter className="w-4 h-4 text-gray-400 shrink-0 hidden sm:block ml-2" />
-          <button
-            onClick={() => setSelectedMuscle('All')}
-            className={`px-3.5 py-1.5 rounded-xl text-xs font-bold transition whitespace-nowrap ${
-              selectedMuscle === 'All'
-                ? 'bg-[#ccff00] text-black'
-                : 'bg-[#1c222e] text-gray-400 hover:text-white border border-gray-800'
-            }`}
-          >
-            All Muscles
-          </button>
-          {muscleGroups.map((group) => (
-            <button
-              key={group}
-              onClick={() => setSelectedMuscle(group)}
-              className={`px-3.5 py-1.5 rounded-xl text-xs font-bold transition whitespace-nowrap ${
-                selectedMuscle === group
-                  ? 'bg-[#ccff00] text-black'
-                  : 'bg-[#1c222e] text-gray-400 hover:text-white border border-gray-800'
-              }`}
-            >
-              {group}
-            </button>
-          ))}
-        </div>
-      </div>
+    
 
       {/* Grid of Workout Cards */}
       {filteredWorkouts.length === 0 ? (

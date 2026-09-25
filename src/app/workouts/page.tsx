@@ -42,9 +42,6 @@ export default async function WorkoutsPage() {
             </p>
           </div>
 
-          <div className="text-sm text-gray-400 font-medium bg-[#141820] border border-gray-800 px-4 py-2 rounded-xl w-fit">
-            Showing <span className="text-[#ccff00] font-bold">{workouts.length}</span> exercises
-          </div>
         </div>
 
         {/* Client-side Search and Filter Controls */}
