@@ -1,6 +1,6 @@
 import React from 'react';
 import Image from 'next/image';
-import Logo from '../app/assets/logo.png'; // Using Next.js path alias, or use standard relative path
+import Logo from '../app/assets/logo.png'; 
 
 const Footer = () => {
     return (

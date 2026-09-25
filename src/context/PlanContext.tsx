@@ -20,7 +20,6 @@ const PlanProvider = ({ children }: { children: React.ReactNode }) => {
 
   const getItemId = (item: Workout) => item.id ?? item._id;
 
-  // Add to Today's Plan (prevents duplicates)
   const addToToday = (item: Workout) => {
     setAdd((prev) => {
       const exists = prev.some((i) => getItemId(i) === getItemId(item));
@@ -28,7 +27,6 @@ const PlanProvider = ({ children }: { children: React.ReactNode }) => {
     });
   };
 
-  // Save for Later (prevents duplicates)
   const saveForLater = (item: Workout) => {
     setPlan((prev) => {
       const exists = prev.some((i) => getItemId(i) === getItemId(item));
@@ -36,12 +34,10 @@ const PlanProvider = ({ children }: { children: React.ReactNode }) => {
     });
   };
 
-  // "Mark as Done" handler
   const removeFromPlan = (id: string | number) => {
     setAdd((prev) => prev.filter((item) => getItemId(item) !== id));
   };
 
-  // "Remove" handler
   const removeItem = (id: string | number, tab: string) => {
     if (tab === 'today') {
       setAdd((prev) => prev.filter((item) => getItemId(item) !== id));

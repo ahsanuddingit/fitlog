@@ -32,10 +32,8 @@ export default function WorkoutFilters({ workouts, muscleGroups }: WorkoutFilter
 
   return (
     <div className="space-y-6">
-      {/* Controls Bar */}
     
 
-      {/* Grid of Workout Cards */}
       {filteredWorkouts.length === 0 ? (
         <div className="border border-dashed border-gray-800 rounded-2xl p-12 text-center bg-[#141820]/40">
           <h3 className="text-xl font-bold uppercase text-gray-300">No workouts found</h3>
